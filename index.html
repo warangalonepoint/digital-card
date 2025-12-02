@@ -1,417 +1,433 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>G. Chaitanya Krishna - Contact</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <title>G. Chaitanya Krishna · Digital Card</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <style>
-    :root {
-      --bg-gradient:
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    body{
+      min-height:100vh;
+      font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      color:#0f172a;
+      background:
         radial-gradient(circle at 0% 0%, #e0f2ff 0, transparent 55%),
         radial-gradient(circle at 100% 0%, #e9d5ff 0, transparent 55%),
-        radial-gradient(circle at 0% 100%, #fee2e2 0, transparent 50%),
-        radial-gradient(circle at 100% 100%, #fef3c7 0, transparent 55%),
-        linear-gradient(135deg, #020617, #020617);
-      --ink: #0f172a;
-      --muted: #64748b;
-      --primary: #22c55e;
-      --card: rgba(255, 255, 255, 0.96);
-      --card-border: rgba(148, 163, 184, 0.55);
-      --card-shadow: 0 22px 60px rgba(15, 23, 42, 0.55);
-      --chip-bg: rgba(255, 255, 255, 0.9);
-      --chip-border: rgba(148, 163, 184, 0.7);
+        radial-gradient(circle at 0% 100%, #fee2e2 0, transparent 55%),
+        radial-gradient(circle at 100% 100%, #fef3c7 0, transparent 60%),
+        linear-gradient(135deg,#020617,#020617);
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    .shell{
+      max-width:460px;
+      width:100%;
     }
 
-    body {
-      min-height: 100vh;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: var(--bg-gradient);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      color: var(--ink);
-    }
-
-    .card {
-      position: relative;
-      max-width: 420px;
-      width: 100%;
-      padding: 22px 20px 20px;
-      border-radius: 26px;
-      background: var(--card);
-      box-shadow: var(--card-shadow);
-      border: 1px solid var(--card-border);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      overflow: hidden;
-    }
-
-    /* subtle inner glow line */
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: 26px;
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      mix-blend-mode: screen;
-      pointer-events: none;
-    }
-
-    .bg-orb {
-      position: absolute;
-      width: 220px;
-      height: 220px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 30%, rgba(34, 197, 94, 0.3), transparent 60%);
-      top: -80px;
-      right: -60px;
-      opacity: 0.9;
-      pointer-events: none;
-    }
-
-    .bg-orb.pink {
-      background: radial-gradient(circle at 30% 30%, rgba(249, 115, 129, 0.28), transparent 60%);
-      top: auto;
-      bottom: -90px;
-      left: -70px;
-    }
-
-    .top-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .brand-block {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .logo-wrap {
-      width: 40px;
-      height: 40px;
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.45);
+    .card{
+      position:relative;
+      background: linear-gradient(145deg,rgba(255,255,255,0.96),rgba(248,250,252,0.96));
+      border-radius:26px;
+      padding:22px 20px 18px;
       box-shadow:
-        0 8px 20px rgba(15, 23, 42, 0.25),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
+        0 22px 60px rgba(15,23,42,0.40),
+        0 0 0 1px rgba(148,163,184,0.45);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      overflow:hidden;
     }
 
-    .logo-wrap img {
-      max-width: 80%;
-      max-height: 80%;
-      object-fit: contain;
-      display: block;
-    }
-
-    .brand-text {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .brand-name {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: var(--muted);
-    }
-
-    .brand-sub {
-      font-size: 11px;
-      color: #8b5cf6;
-      font-weight: 600;
-    }
-
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      padding: 5px 10px;
-      border-radius: 999px;
-      background: var(--chip-bg);
-      border: 1px solid var(--chip-border);
-      color: var(--muted);
-    }
-
-    .tag-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: #22c55e;
-      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.16);
-    }
-
-    h1 {
-      font-size: 22px;
-      line-height: 1.2;
-      margin-bottom: 2px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .role {
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 6px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .company {
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 16px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .company span {
-      color: #0f172a;
-      font-weight: 600;
-    }
-
-    .info {
-      border-radius: 18px;
+    .card::before{
+      content:'';
+      position:absolute;
+      inset:0;
       background:
-        radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.22), transparent 55%),
-        rgba(255, 255, 255, 0.9);
-      padding: 14px 14px 12px;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      position: relative;
-      z-index: 1;
+        radial-gradient(circle at 0 0, rgba(56,189,248,0.20), transparent 55%),
+        radial-gradient(circle at 100% 0, rgba(244,114,182,0.22), transparent 55%),
+        radial-gradient(circle at 0 100%, rgba(52,211,153,0.18), transparent 55%);
+      opacity:0.85;
+      pointer-events:none;
     }
 
-    .field-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 8px;
-      gap: 10px;
+    .card-inner{
+      position:relative;
+      z-index:1;
     }
 
-    .field-label {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: var(--muted);
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size:10px;
+      letter-spacing:0.16em;
+      text-transform:uppercase;
+      padding:5px 11px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.88);
+      border:1px solid rgba(148,163,184,0.55);
+      color:#6b7280;
+      margin-bottom:10px;
+    }
+    .tag-dot{
+      width:7px;
+      height:7px;
+      border-radius:999px;
+      background:#22c55e;
+      box-shadow:0 0 12px rgba(34,197,94,0.9);
     }
 
-    .field-value {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--ink);
-      text-align: right;
-      word-break: break-all;
+    .logo-orb{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      margin-bottom:12px;
     }
 
-    .field-value a {
-      color: #0369a1;
-      text-decoration: none;
+    .logo-wrap{
+      position:relative;
+      width:70px;
+      height:70px;
+      flex:0 0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
 
-    .field-value a:hover {
-      text-decoration: underline;
+    .logo-wrap::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      border-radius:999px;
+      background:radial-gradient(circle at 30% 0%, #fed7aa 0, #fb923c 40%, #f97316 70%, transparent 100%);
+      opacity:0.9;
+      filter:blur(6px);
     }
 
-    .divider {
-      border: none;
-      height: 1px;
-      background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(148, 163, 184, 0.95),
-        transparent
-      );
-      margin: 10px 0 9px;
+    .logo-wrap::after{
+      content:'';
+      position:absolute;
+      bottom:-20px;
+      left:12px;
+      right:12px;
+      height:28px;
+      border-radius:999px;
+      background:radial-gradient(ellipse at center, rgba(248,171,103,0.9), transparent 70%);
+      opacity:0.85;
+      filter:blur(4px);
+      z-index:-1;
     }
 
-    .btn-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 4px;
+    .logo-wrap img{
+      position:relative;
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      filter:drop-shadow(0 18px 30px rgba(248,171,103,0.95));
     }
 
-    .btn {
-      flex: 1 1 48%;
-      min-width: 0;
-      padding: 10px 12px;
-      border-radius: 999px;
-      border: none;
-      outline: none;
-      cursor: pointer;
-      font-size: 13px;
-      font-weight: 500;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      transition:
-        transform 0.08s ease,
-        box-shadow 0.08s ease,
-        background 0.14s ease,
-        color 0.14s ease;
-      white-space: nowrap;
-      gap: 6px;
+    h1{
+      font-size:22px;
+      line-height:1.25;
+      color:#0f172a;
+      margin-bottom:3px;
     }
 
-    .btn:active {
-      transform: translateY(1px) scale(0.99);
-      box-shadow: none;
+    .role{
+      font-size:13px;
+      color:#4b5563;
+      margin-bottom:4px;
     }
 
-    .btn-primary {
-      background: linear-gradient(135deg, #22c55e, #0ea5e9);
-      color: #f9fafb;
-      box-shadow: 0 12px 24px rgba(34, 197, 94, 0.45);
-      border: 1px solid rgba(187, 247, 208, 0.9);
+    .company{
+      font-size:13px;
+      color:#0f172a;
+      font-weight:500;
+      margin-bottom:12px;
+    }
+    .company span{
+      color:#22c55e;
     }
 
-    .btn-primary:hover {
-      background: linear-gradient(135deg, #16a34a, #0284c7);
+    .info{
+      border-radius:18px;
+      background:rgba(255,255,255,0.90);
+      border:1px solid rgba(148,163,184,0.55);
+      box-shadow:
+        0 12px 30px rgba(15,23,42,0.12),
+        inset 0 1px 0 rgba(255,255,255,0.8);
+      padding:14px 14px 12px;
+      margin-bottom:14px;
     }
 
-    .btn-ghost {
-      background: rgba(255, 255, 255, 0.95);
-      color: var(--ink);
-      border: 1px solid rgba(148, 163, 184, 0.7);
-      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
+    .field-row{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:7px;
+      gap:10px;
     }
 
-    .btn-ghost:hover {
-      background: rgba(241, 245, 249, 0.96);
+    .field-label{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:0.14em;
+      color:#9ca3af;
+      white-space:nowrap;
     }
 
-    .btn span.icon {
-      font-size: 15px;
-      line-height: 1;
+    .field-value{
+      font-size:13px;
+      font-weight:500;
+      color:#111827;
+      text-align:right;
+      word-break:break-all;
     }
 
-    .footer-note {
-      margin-top: 12px;
-      font-size: 11px;
-      color: var(--muted);
-      line-height: 1.5;
-      position: relative;
-      z-index: 1;
+    .field-value a{
+      color:#0ea5e9;
+      text-decoration:none;
+    }
+    .field-value a:hover{
+      text-decoration:underline;
     }
 
-    .footer-note span {
-      color: #7c3aed;
-      font-weight: 500;
+    .divider{
+      border:none;
+      height:1px;
+      margin:8px 0 10px;
+      background:linear-gradient(90deg,rgba(148,163,184,0.9),transparent);
     }
 
-    @media (max-width: 400px) {
-      .card {
-        padding: 18px 16px 18px;
-        border-radius: 22px;
+    .layout-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    .col-left{
+      flex:1 1 180px;
+      min-width:0;
+    }
+
+    .col-right{
+      flex:0 0 130px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+    }
+
+    .qr-wrap{
+      border-radius:20px;
+      padding:10px;
+      background:rgba(255,255,255,0.95);
+      border:1px solid rgba(148,163,184,0.55);
+      box-shadow:0 10px 26px rgba(15,23,42,0.18);
+    }
+
+    .qr-wrap img{
+      display:block;
+      width:110px;
+      height:110px;
+    }
+
+    .qr-caption{
+      font-size:11px;
+      text-align:center;
+      color:#6b7280;
+      max-width:140px;
+    }
+
+    .btn-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:4px;
+    }
+
+    .btn{
+      flex:1 1 48%;
+      min-width:0;
+      padding:9px 10px;
+      border-radius:999px;
+      border:none;
+      cursor:pointer;
+      font-size:13px;
+      font-weight:500;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:5px;
+      text-decoration:none;
+      transition:transform 0.08s ease, box-shadow 0.08s ease, background 0.12s ease;
+      white-space:nowrap;
+    }
+
+    .btn:active{
+      transform:translateY(1px) scale(0.99);
+      box-shadow:none;
+    }
+
+    .btn-primary{
+      background:linear-gradient(135deg,#22c55e,#16a34a);
+      color:#f9fafb;
+      box-shadow:0 12px 22px rgba(34,197,94,0.45);
+      border:1px solid rgba(187,247,208,0.9);
+    }
+    .btn-primary:hover{
+      background:linear-gradient(135deg,#4ade80,#16a34a);
+    }
+
+    .btn-ghost{
+      background:rgba(255,255,255,0.96);
+      color:#0f172a;
+      border:1px solid rgba(148,163,184,0.8);
+    }
+    .btn-ghost:hover{
+      background:rgba(248,250,252,1);
+    }
+
+    .btn span.icon{
+      font-size:15px;
+      line-height:1;
+    }
+
+    .footer-note{
+      margin-top:10px;
+      font-size:11px;
+      color:#6b7280;
+      text-align:left;
+    }
+    .footer-note span{
+      color:#4f46e5;
+      font-weight:500;
+    }
+
+    @media (max-width:480px){
+      .card{
+        padding:18px 16px 16px;
+        border-radius:22px;
       }
-      .btn-row {
-        flex-direction: column;
+      .logo-orb{
+        flex-direction:row;
+        align-items:center;
       }
-      .btn {
-        flex: 1 1 100%;
+      .layout-row{
+        flex-direction:column;
+      }
+      .col-right{
+        flex:1 1 auto;
+        flex-direction:row;
+      }
+      .qr-wrap img{
+        width:96px;
+        height:96px;
+      }
+    }
+
+    @media (max-width:360px){
+      .btn-row{
+        flex-direction:column;
+      }
+      .btn{
+        flex:1 1 100%;
       }
     }
   </style>
 </head>
 <body>
-  <div class="card">
-    <div class="bg-orb"></div>
-    <div class="bg-orb pink"></div>
-
-    <div class="top-row">
-      <div class="brand-block">
-        <div class="logo-wrap">
-          <!-- onestop logo -->
-          <img src="./logo.png" alt="Onestop AI Services logo" />
+  <div class="shell">
+    <div class="card">
+      <div class="card-inner">
+        <div class="tag">
+          <span class="tag-dot"></span>
+          Onestop AI · Digital Card
         </div>
-        <div class="brand-text">
-          <div class="brand-name">Onestop AI Services</div>
-          <div class="brand-sub">Solo Founders · Local Ops</div>
-        </div>
-      </div>
 
-      <div class="tag">
-        <span class="tag-dot"></span>
-        DIGITAL CARD
+        <div class="logo-orb">
+          <div class="logo-wrap">
+            <img src="./logo.png" alt="Onestop AI logo">
+          </div>
+          <div>
+            <h1>G. Chaitanya Krishna</h1>
+            <p class="role">CEO</p>
+            <p class="company"><span>Onestop AI Services</span></p>
+          </div>
+        </div>
+
+        <div class="layout-row">
+          <div class="col-left">
+            <div class="info">
+              <div class="field-row">
+                <span class="field-label">Phone</span>
+                <span class="field-value">
+                  <a href="tel:9390664577">9390664577</a>
+                </span>
+              </div>
+
+              <div class="field-row">
+                <span class="field-label">Website</span>
+                <span class="field-value">
+                  <a href="https://warangalonestop.in" target="_blank" rel="noopener noreferrer">
+                    warangalonestop.in
+                  </a>
+                </span>
+              </div>
+
+              <div class="field-row">
+                <span class="field-label">Portal</span>
+                <span class="field-value">
+                  <a href="https://onestop.warangalonestop.in" target="_blank" rel="noopener noreferrer">
+                    onestop.warangalonestop.in
+                  </a>
+                </span>
+              </div>
+
+              <hr class="divider">
+
+              <div class="btn-row">
+                <a
+                  class="btn btn-primary"
+                  download="G_Chaitanya_Krishna.vcf"
+                  href="data:text/vcard;charset=utf-8,BEGIN%3AVCARD%0AVERSION%3A3.0%0AFN%3AG.%20Chaitanya%20Krishna%0AN%3AKrishna%3BChaitanya%3B%3B%3B%0AORG%3AOnestop%20AI%20Services%0ATEL%3BTYPE%3DCELL%3A9390664577%0AURL%3Ahttps%3A%2F%2Fwarangalonestop.in%0AURL%3Ahttps%3A%2F%2Fonestop.warangalonestop.in%0AEND%3AVCARD">
+                  <span class="icon">⬇️</span>
+                  Save Contact
+                </a>
+
+                <a class="btn btn-ghost" href="tel:9390664577">
+                  <span class="icon">📞</span>
+                  Call Now
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-right">
+            <div class="qr-wrap">
+              <!-- QR via external generator: encodes vCard-style contact -->
+              <img
+                src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=BEGIN%3AVCARD%0AVERSION%3A3.0%0AFN%3AG.%20Chaitanya%20Krishna%0AN%3AKrishna%3BChaitanya%3B%3B%3B%0AORG%3AOnestop%20AI%20Services%0ATEL%3BTYPE%3DCELL%3A9390664577%0AURL%3Ahttps%3A%2F%2Fwarangalonestop.in%0AURL%3Ahttps%3A%2F%2Fonestop.warangalonestop.in%0AEND%3AVCARD"
+                alt="QR code for G. Chaitanya Krishna contact">
+            </div>
+            <p class="qr-caption">Scan to save contact or share this card instantly.</p>
+          </div>
+        </div>
+
+        <p class="footer-note">
+          Scanned from QR · Contact save includes <span>name, company & phone</span>.
+        </p>
       </div>
     </div>
-
-    <h1>G. Chaitanya Krishna</h1>
-    <p class="role">CEO</p>
-    <p class="company">
-      <span>Onestop AI Services</span>
-    </p>
-
-    <div class="info">
-      <div class="field-row">
-        <span class="field-label">Phone</span>
-        <span class="field-value">
-          <a href="tel:9390664577">9390664577</a>
-        </span>
-      </div>
-
-      <div class="field-row">
-        <span class="field-label">Website</span>
-        <span class="field-value">
-          <a href="https://warangalonestop.in" target="_blank" rel="noopener noreferrer">
-            warangalonestop.in
-          </a>
-        </span>
-      </div>
-
-      <div class="field-row">
-        <span class="field-label">Portal</span>
-        <span class="field-value">
-          <a href="https://onestop.warangalonestop.in" target="_blank" rel="noopener noreferrer">
-            onestop.warangalonestop.in
-          </a>
-        </span>
-      </div>
-
-      <hr class="divider" />
-
-      <div class="btn-row">
-        <a
-          class="btn btn-primary"
-          download="G_Chaitanya_Krishna.vcf"
-          href="data:text/vcard;charset=utf-8,BEGIN%3AVCARD%0AVERSION%3A3.0%0AFN%3AG.%20Chaitanya%20Krishna%0ATEL%3BTYPE%3DCELL%3A9390664577%0AEND%3AVCARD"
-        >
-          <span class="icon">⬇️</span>
-          Save Contact
-        </a>
-
-        <a class="btn btn-ghost" href="tel:9390664577">
-          <span class="icon">📞</span>
-          Call Now
-        </a>
-      </div>
-    </div>
-
-    <p class="footer-note">
-      Scanned from QR · Contact save includes <span>name + phone only</span>.
-    </p>
   </div>
 </body>
 </html>
